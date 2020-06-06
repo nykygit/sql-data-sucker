@@ -12,9 +12,11 @@ There are a number of ELT methods and third party products on the market.  Some 
 ### Industry Terms
 - Report Viewer - The people who view reports.
 - Report Developer - The people who develop reports.
-- Data Catalog - All database names, object names, and meta data.  No sample data.
-- Data Dictionary - Business Definitions applied to the Data Catalog.
-- Sample Data - A subset of data to help better identify what data exists.
+- Data Scientist - The Report Developers who enjoy math in particular.
+- Data Engineer - The guy who made this.
+- Data Catalog - All database names, object names, and meta data.  No sample data.  Used by Report Developers to develop a Data Dictionary.
+- Data Dictionary - Business definitions applied to the Data Catalog.  Identification of data.
+- Sample Data - A subset of data from an object in Data Catalog to better identify what data exists.  Useful if you don't necessarily need to pull all the data in a large table.
 - SQL Linked Servers - SQL Server technology/feature for connecting to remote servers.
 
 ### SQL Data Sucker Terms
@@ -22,10 +24,11 @@ There are a number of ELT methods and third party products on the market.  Some 
 - Sync Schedule - There are set of Sync Schedules, for example, hourly, working days, weekends, nights, every 15 minutes.  Each object has a matching Schedule ID so the Sync Proc knows when to sync it.
 - Sync Proc - Runs anytime a SQL Agent Schedule calls it.  Runs against all objects with a matching Schedule ID.
 - Linked Servers - Used to connect to all Production Database Systems.
-- AutoPermissions
+- AutoPermissions -Grant access to report database views based on key phrases - aka dynamic rules.
 
 ## Moving Parts / Underlying Assumptions
 
 1. At any time, a production database, its schema, or data can be deleted or changed.  This can screw up reports.  This solution doesn't attempt to fix that.  Remapping Source Data to a Business Layer is just a part of life as a Report Developer / Data Scientist.
 
-2. 
+2. You cannot remotely call functions and stored procedures that exist on the source production database.  It goes against the principal of guaranteeing Remote Read Only access.  You have 2 options, recreate those functions in your own Dev Database and apply them to the Tables and Views sucked, or create a Dev View in the Production Database that uses those functions or stored procedures.
+
