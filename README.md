@@ -1,4 +1,6 @@
 # sql-data-sucker
+
+## Overview
 If we have a large number of production databases, or even just one, we may choose to Extract the data, Load the Data into a Reporting Database, and then Transform the Data (ELT).  Allowing Report Developers to connect directly to production databases, while at first may be convenient, can cause a myriad of issues - performance, security, stability, etc... The goal of this project is to configure a SQL Server with a centralized Reporting Database for Report Developers to consume data.
 
 
