@@ -24,11 +24,12 @@ There are a number of ELT methods and third party products on the market.  Some 
 - Sync Schedule - There are set of Sync Schedules, for example, hourly, working days, weekends, nights, every 15 minutes.  Each object has a matching Schedule ID so the Sync Proc knows when to sync it.
 - Sync Proc - Runs anytime a SQL Agent Schedule calls it.  Runs against all objects with a matching Schedule ID.
 - Linked Servers - Used to connect to all Production Database Systems.
-- AutoPermissions -Grant access to report database views based on key phrases - aka dynamic rules.
+- AutoPermissions - Grant access to report database views based on key phrases - aka dynamic rules.
+-Sync Objects - All the objects we sync/copy to the reporting datbase.
 
 ## Moving Parts / Underlying Assumptions
 
-1. At any time, a production database, its schema, or data can be deleted or changed.  This can screw up reports.  This solution doesn't attempt to fix that.  Remapping Source Data to a Business Layer is just a part of life as a Report Developer / Data Scientist.
+1. At any time, a production database, its schema, or data can be deleted or changed.  This can screw up reports.  This solution doesn't attempt to fix that.  Remapping Source Data to a Business Layer is just a part of life as a Report Developer / Data Scientist.  If source data is renamed or deleted, we simply leave the last copy intact on the Reporting Database and mark the Sync Objects as deprecated.
 
 2. You cannot remotely call functions and stored procedures that exist on the source production database.  It goes against the principal of guaranteeing Remote Read Only access.  You have 2 options, recreate those functions in your own Dev Database and apply them to the Tables and Views sucked, or create a Dev View in the Production Database that uses those functions or stored procedures.
 
