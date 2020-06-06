@@ -11,16 +11,16 @@ There are a number of ELT methods and third party products on the market.  Some 
 - Report Viewer - The people who view reports.
 - Report Developer - The people who develop reports.
 - Data Catalog - All database names, object names, and meta data.  No sample data.
-Data Dictionary - Business Definitions applied to the Data Catalog.
-Sample Data - A subset of data to help better identify what data exists.
-Linked Servers - SQL Server technology/feature for connecting to remote servers.
+- Data Dictionary - Business Definitions applied to the Data Catalog.
+- Sample Data - A subset of data to help better identify what data exists.
+- SQL Linked Servers - SQL Server technology/feature for connecting to remote servers.
 
 ### SQL Data Sucker Terms
-Sync Method
-Sync Schedule - There are set of Sync Schedules, for example, hourly, working days, weekends, nights, every 15 minutes.  Each object has a matching Schedule ID so the Sync Proc knows when to sync it.
-Sync Proc - Runs anytime a SQL Agent Schedule calls it.  Runs against all objects with a matching Schedule ID.
-Linked Servers - Used to connect to all Production Database Systems.
-AutoPermissions
+- Sync Method
+- Sync Schedule - There are set of Sync Schedules, for example, hourly, working days, weekends, nights, every 15 minutes.  Each object has a matching Schedule ID so the Sync Proc knows when to sync it.
+- Sync Proc - Runs anytime a SQL Agent Schedule calls it.  Runs against all objects with a matching Schedule ID.
+- Linked Servers - Used to connect to all Production Database Systems.
+- AutoPermissions
 
 ## Moving Parts / Underlying Assumptions
 
