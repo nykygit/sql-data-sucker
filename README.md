@@ -6,7 +6,7 @@ If we have a large number of production databases, or even just one, we may choo
 
 ## Why use it?
 
-Let's start from the beginning.  Allowing Report Developers to connect directly to Production Databases may be convenient but eventually you may find yourself in what some call Database Hell.  This is especially true if you manage multiple servers + potentially 100s of databases.  The impacts of allowing developers to connect directly to Production Databases will eventually show up as reports of degraded application performance, "degreaded" (..degraded reads) report performance, data sources in more holes than a chipmonk can dig, and the one thing no DBA wants to hear about, loss of trust when it comes to data security and no fingers to point.  The solution is simple.  Copy your Production Data into a Reporting Database, secure it, and set the baseline for a lovely day as a DBA.
+Let's start from the beginning.  Allowing Report Developers to connect directly to Production Databases may be convenient but eventually you may find yourself in what some call Database Hell.  This is especially true if you manage multiple servers + potentially 100s or 1000s of databases.  The impacts of allowing developers to connect directly to Production Databases will eventually show up as reports of degraded application performance, "degreaded" (..degraded reads) report performance, data sources in more holes than a chipmonk can dig, and the one thing no DBA wants to hear about, loss of trust when it comes to data security and no fingers to point.  The solution is simple.  Copy your Production Data into a Reporting Database, secure it, and set the baseline for a lovely day as a DBA.
 
 So now that we have a basic premise for duplicating, aka syncing data, we can ask:
 
