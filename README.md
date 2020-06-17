@@ -1,11 +1,28 @@
 # SQL Data Sucker
 
 ## Overview
-If we have a large number of production databases, or even just one, we may choose to Extract the data, Load the Data into a Reporting Database, and then Transform the Data (ELT).  Allowing Report Developers to connect directly to production databases, while at first may be convenient, can cause a myriad of issues - performance, security, stability, etc... The same can be said for ORM tools.  The goal of this project is to configure a SQL Server with a centralized Reporting Database for Report Developers to consume data from a central endpoint, with centralized permissions.
 
+If we have a large number of production databases, or even just one, we may choose to Extract the data, Load the Data into a Reporting Database, and then Transform the Data (ELT).  In the cloud we have an array of tools to choose from.  On Premise environments might not have this option.  Introducing SQLDataSucker.  Selectively suck data from one or more SQL Servers into a central SQL database for reporting.  Build up a Data Catalog for your Report Developers.  Configure database objects to Sync and customize the scheduling.  Choose a custom update method.  Automatically assign permissions based on rules and more!
 
-## Background
-There are a number of ELT methods and third party products on the market.  Some are more or less invasive than others.  The goal of this is to access production with Read Only access with managed SQL queries, and absolutely no changes made to the Production Schema, Database, or Server.  Some might ask, why not configure replication?  Try doing that on 100 servers, or where it is not possible to make changes in the production environment.  We just need a bulletproof, un-contested way to peer in with Read Only Access and selectively take only what is needed for Reporting purposes.  This is a minimalistic on demand approach.  With large databases we may not be able to backup restore the whole database on an hourly basis, nor do we necessarily need all the data in the database for reporting.  Also, some database objects we may only need to be refreshed hourly versus daily, versus weekly.  This will save you on bandwidth and unecessary disk writes and reads, potentially extending hardware longevity.  You may only want to pull the newest rows, greater than a certain date, or primary key greater than the last one pulled.  We can even go as far as preventing performance issues by preventing syncing of tables with more than X rows on a certain schedule, or based on the query TTL.  By introducing a permissions layer on a centralized Reporting Database - you have the opportunity to reset your approach to data access control.  Production database permissions was never designed to overlap with reporting permissions - and you could actually introduce major security holes unknowingly!  Lastly you are probably asking why build this?  Well, because it's easy, you have more control over the features, and I just so happen to enjoy it!
+## Why use it?
+
+Let's start from the beginning.  Allowing Report Developers to connect directly to Production Databases may be convenient but eventually you may find yourself in what some call Database Hell.  This is especially true if you manage multiple servers + potentially 100s of databases.  The impacts of allowing developers to connect directly to Production Databases will eventually show up as reports of degraded application performance, degreaded report performance, data sources in more holes than a chipmonk can dig, and the one thing no DBA wants to hear about, loss of trust when it comes to data security.  The solution is simple.  Copy your Production Data into a Reporting Database.  It's unavoidable.
+
+So now that we have a basic premise for syncing data, we can ask:
+
+1. How much data?
+2. How often?
+3. What technology/method to use?
+
+Database replication?  If you have 100 servers there is a high chance you might not even be allowed to make changes on some of them.  Replication requires touching stuff that could break stuff.  You also don't have time to be making changes on 100 servers, and keeping track of things that other people have changed in your absence.  Central Configuration should be maximized and Remote Configuration should be minimal.  Either it works or it doesn't, and if it doesn't it shouldn't take more than 10 minutes to understand why and fix it.
+
+Full Database Backup Restore?  Doesn't work if you have a +10GB database.  Even if you ran transaction log backups every minute, you're asking for trouble.  Not to mention, if the backup is done on a higher version of SQL Server than you central database server, you won't be able to restore it.  And you still have 100 separate databases at the end of the day...perhaps for the sake of 100 tables.  And you're killing your hardware by unecessary I/O.
+
+Third party tool?  Haven't seen one I like.  Maybe I haven't looked hard enough but I'm not asking for much so I figured I'd just build one.
+
+## Features Required
+
+<in the Project Board>
 
 ## Terminology
 
