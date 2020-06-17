@@ -6,19 +6,21 @@ If we have a large number of production databases, or even just one, we may choo
 
 ## Why use it?
 
-Let's start from the beginning.  Allowing Report Developers to connect directly to Production Databases may be convenient but eventually you may find yourself in what some call Database Hell.  This is especially true if you manage multiple servers + potentially 100s of databases.  The impacts of allowing developers to connect directly to Production Databases will eventually show up as reports of degraded application performance, "degreaded" (..degraded reads) report performance, data sources in more holes than a chipmonk can dig, and the one thing no DBA wants to hear about, loss of trust when it comes to data security.  The solution is simple.  Copy your Production Data into a Reporting Database.  It's unavoidable.
+Let's start from the beginning.  Allowing Report Developers to connect directly to Production Databases may be convenient but eventually you may find yourself in what some call Database Hell.  This is especially true if you manage multiple servers + potentially 100s of databases.  The impacts of allowing developers to connect directly to Production Databases will eventually show up as reports of degraded application performance, "degreaded" (..degraded reads) report performance, data sources in more holes than a chipmonk can dig, and the one thing no DBA wants to hear about, loss of trust when it comes to data security and no fingers to point.  The solution is simple.  Copy your Production Data into a Reporting Database, secure it, and set the baseline for a lovely day as a DBA.
 
-So now that we have a basic premise for syncing data, we can ask:
+So now that we have a basic premise for duplicating, aka syncing data, we can ask:
 
 1. How much data?
 2. How often?
 3. What technology/method to use?
+4. How do we secure it?
+5. How do we procure access control?
 
-Database replication?  If you have 100 servers there is a high chance you might not even be allowed to make changes on some of them.  Replication requires touching stuff that could break stuff.  You also don't have time to be making changes on 100 servers, and keeping track of things that other people have changed in your absence.  Central Configuration should be maximized and Remote Configuration should be minimal.  Either it works or it doesn't, and if it doesn't it shouldn't take more than 10 minutes to understand why and fix it.
+How much data?  Well, if you have done much work with Report Development, you will probably agree that 10% of your tables contain 90% of the data you actually care about as a business.  So let's just assume that it would be overkill to copy the entire database.  This puts Full Database Backup Restore out of the question.  Let's elaborate. Full backup restore is not an option with large databases where the backup restore time can easily be greater than the refresh interval requirement.  Even if it was, and the backup is done on a higher version of SQL Server than your Report Database SQL Server, you won't be able to restore it.  At the end of the day you still have 100 separate databases...perhaps for the sake of 100 tables.  You're killing your hardware by unecessary I/O.  So it's definitely out of the question.
 
-Full Database Backup Restore?  Doesn't work if you have a +10GB database.  Even if you ran transaction log backups every minute, you're asking for trouble.  Not to mention, if the backup is done on a higher version of SQL Server than you central database server, you won't be able to restore it.  And you still have 100 separate databases at the end of the day...perhaps for the sake of 100 tables.  And you're killing your hardware by unecessary I/O.
+Replication?  If you have 100 servers there is a high chance you might not even be allowed to make changes on some of them.  Replication requires touching stuff that could break stuff.  You also don't have time to be making changes on 100 servers, and keeping track of things that other people have changed in your absence.  Not to mention, replication features are different for different versions of SQL Server.  Central Configuration should be maximized and Remote Configuration should be minimal.  Either it works or it doesn't, and if it doesn't it shouldn't take 10 minutes to understand why and fix it.  This means we have to use a method that is unquestionably supported on all versions of SQL Server, and there is no remote chance of the feature being deprecated.  Hint hint: SELECT.
 
-Third party tool?  Haven't seen one I like.  Maybe I haven't looked hard enough but I'm not asking for much so I figured I'd just build one.
+Third party tool?  Maybe I haven't looked hard enough but I'm not asking for much so why not just build a data sync solution.
 
 ## Features Required
 
