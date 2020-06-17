@@ -24,7 +24,6 @@ So with that said...why not just build a data sync solution.
 
 ## Terminology
 
-### Industry Terms
 - Report Viewer - The people who view reports.
 - Report Developer - The people who develop reports.
 - Data Scientist - The Report Developers who enjoy math in particular.
