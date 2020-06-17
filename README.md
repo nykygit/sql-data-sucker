@@ -34,14 +34,6 @@ So with that said...why not just build a data sync solution.
 - Sample Data - A subset of data from an object in Data Catalog to better identify what data exists.  Useful if you don't necessarily need to pull all the data in a large table.
 - SQL Linked Servers - SQL Server technology/feature for connecting to remote SQL servers.  Critical dependency for this to work.
 
-### SQL Data Sucker Terms
-- Sync Method
-- Sync Schedule - There are set of Sync Schedules, for example, hourly, working days, weekends, nights, every 15 minutes.  Each object has a matching Schedule ID so the Sync Proc knows when to sync it.
-- Sync Proc - Runs anytime a SQL Agent Schedule calls it.  Runs against all objects with a matching Schedule ID.
-- Linked Servers - Used to connect to all Production Database Systems.
-- AutoPermissions - Grant access to report database views based on key phrases - aka dynamic rules.
--Sync Objects - All the objects we sync/copy to the reporting datbase.
-
 ## Underlying Assumptions
 
 1. At any time, a production database, its schema, or data can be deleted or changed.  This can screw up reports.  SQLDataSucker doesn't attempt to address that.  It is simply a pipeline for centralizing data.  Remapping Source Data to a Business Layer is a Data Science problem.  If source data is renamed or deleted, we simply leave the last copy intact on the Reporting Database and mark the Objects as deprecated so the Report Developer is aware.
